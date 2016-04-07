@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -55,6 +58,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Adapte
     ArrayList<HashMap<String, String>> towList;
     Fragment mapFragment = new MapFragment();
     HCBaseAdapter hcBaseAdapter;
+    ProgressBar progressbar;
 
     private static final String TAG_LGA = "lga";
     private static final String TAG_TOWN = "town";
@@ -78,6 +82,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Adapte
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.health_centre_fragment, container, false);
         // initializeData();
+        progressbar = (ProgressBar) view.findViewById(R.id.progressbar);
 
         towList = new ArrayList<HashMap<String, String>>();
         searchview = (EditText) view.findViewById(R.id.edittextid);
@@ -177,12 +182,38 @@ public class HealthCareFragment extends AbstractHealthFragment implements Adapte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        // progressbarMtd();
         Switchfragment(R.id.mylayout, mapFragment, Float.parseFloat(towList.get(position).get(TAG_LNG)),
                 Float.parseFloat(towList.get(position).get(TAG_LAT)), towList.get(position).get(TAG_NAME),
                 towList.get(position).get(TAG_CONTRACTOR));
+        progressbarMtd();
 
 
+    }
+
+    private void progressbarMtd() {
+        progressbar.setVisibility(View.VISIBLE);
+
+// Create a Handler instance on the main thread
+        final Handler handler = new Handler();
+
+// Create and start a new Thread
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Thread.sleep(5000);
+                } catch (Exception e) {
+                } // Just catch the InterruptedException
+
+                // Now we use the Handler to post back to the main thread
+                handler.post(new Runnable() {
+                    public void run() {
+                        // Set the View's visibility back on the main UI Thread
+                        progressbar.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
+        }).start();
     }
 
 
