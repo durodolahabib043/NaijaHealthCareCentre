@@ -66,6 +66,8 @@ public class HealthCareFragment extends AbstractHealthFragment implements Adapte
     private static final String TAG_CONTRACTOR = "contractor";
     private static final String TAG_LNG = "lng";
     private static final String TAG_LAT = "lat";
+    RecyclerView rv;
+    LinearLayoutManager llm;
 
 
     public HealthCareFragment() {
@@ -80,28 +82,30 @@ public class HealthCareFragment extends AbstractHealthFragment implements Adapte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.health_centre_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_for_recyclerview, container, false);
         // initializeData();
-        progressbar = (ProgressBar) view.findViewById(R.id.progressbar);
+        //    progressbar = (ProgressBar) view.findViewById(R.id.progressbar);
 
         towList = new ArrayList<HashMap<String, String>>();
-        searchview = (EditText) view.findViewById(R.id.edittextid);
+        //  searchview = (EditText) view.findViewById(R.id.edittextid);
 
-        listview = (ListView) view.findViewById(R.id.health_centre_list);
+// listview
+        // listview = (ListView) view.findViewById(R.id.health_centre_list);
+        // rv = (RecyclerView)view.findViewById(R.id.rv);
 
 
-
-        /*rv = (RecyclerView) view.findViewById(R.id.rv);
+        rv = (RecyclerView) view.findViewById(R.id.rv);
         // not sure
         rv.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        llm = new LinearLayoutManager(getContext());
         rv.setLayoutManager(llm);
 
-*/
 
         new DownloadTask().execute();
+
+        //list view
         //testbtn.setOnClickListener(this);
-        listview.setOnItemClickListener(this);
+        // listview.setOnItemClickListener(this);
         return view;
 
     }
@@ -109,7 +113,9 @@ public class HealthCareFragment extends AbstractHealthFragment implements Adapte
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        searchview.addTextChangedListener(new TextWatcher() {
+
+        // text
+    /*    searchview.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 String text = searchview.getText().toString().toLowerCase(Locale.getDefault());
@@ -126,7 +132,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Adapte
             public void afterTextChanged(Editable s) {
 
             }
-        });
+        });*/
     }
 
     // mathod to parse json
@@ -243,9 +249,10 @@ public class HealthCareFragment extends AbstractHealthFragment implements Adapte
             } else {
                 Log.d(" url string", result);
                 jsonParserr(result);
-
-                hcBaseAdapter = new HCBaseAdapter(getContext(), towList);
-                listview.setAdapter(hcBaseAdapter);
+                RVAdapter adapter = new RVAdapter(towList);
+                rv.setAdapter(adapter);
+                /*hcBaseAdapter = new HCBaseAdapter(getContext(), towList);
+                listview.setAdapter(hcBaseAdapter);*/
 
 
             }

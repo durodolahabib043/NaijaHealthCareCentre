@@ -27,7 +27,7 @@
                 android:layout_marginRight="16dp" />
 
             <TextView
-                android:id="@+id/person_name"
+                android:id="@+id/lga_cardview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -35,10 +35,10 @@
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/person_age"
+                android:id="@+id/name_cardview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/person_name"
+                android:layout_below="@+id/lga_cardview"
                 android:layout_toRightOf="@+id/person_photo" />
 
         </RelativeLayout>
