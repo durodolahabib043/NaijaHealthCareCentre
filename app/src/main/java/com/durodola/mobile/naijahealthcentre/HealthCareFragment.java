@@ -1,64 +1,48 @@
 package com.durodola.mobile.naijahealthcentre;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import android.widget.ProgressBar;
-import android.widget.SearchView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 
 
-public class HealthCareFragment extends AbstractHealthFragment implements AdapterView.OnItemClickListener {
+public class HealthCareFragment extends AbstractHealthFragment implements RecyclerView.OnItemTouchListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     ListView listview;
     EditText searchview;
 
     String urlreal = "https://api.myjson.com/bins/41u0g";
+    private RVAdapter.MyItemClickListener mListener;
 
 
     ArrayList<HashMap<String, String>> towList;
     Fragment mapFragment = new MapFragment();
     HCBaseAdapter hcBaseAdapter;
     ProgressBar progressbar;
+    RVAdapter adapter;
 
     private static final String TAG_LGA = "lga";
     private static final String TAG_TOWN = "town";
@@ -135,6 +119,42 @@ public class HealthCareFragment extends AbstractHealthFragment implements Adapte
         });*/
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adapter != null) {
+            adapter.SetOnItemCLickListener(new RVAdapter.MyItemClickListener() {
+                                               @Override
+                                               public void onItemClick(View view, int position) {
+                                                   Log.e("TAG", " onresume");
+
+                                               }
+                                           }
+            );
+
+        }
+
+
+    }
+
+ /*   @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (adapter != null) {
+            adapter.SetOnItemCLickListener(new RVAdapter.MyItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Toast.makeText(getActivity(), " position" + position, Toast.LENGTH_LONG);
+                    Log.e(" recyccler ", " toarch ");
+                }
+            });
+
+
+        }
+
+
+    }*/
+
     // mathod to parse json
     private void jsonParserr(String in) {
 
@@ -186,7 +206,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Adapte
 
     }
 
-    @Override
+/*    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // progressbarMtd();
         Switchfragment(R.id.mylayout, mapFragment, Float.parseFloat(towList.get(position).get(TAG_LNG)),
@@ -195,7 +215,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Adapte
         progressbarMtd();
 
 
-    }
+    }*/
 
     private void progressbarMtd() {
         progressbar.setVisibility(View.VISIBLE);
@@ -220,6 +240,22 @@ public class HealthCareFragment extends AbstractHealthFragment implements Adapte
                 });
             }
         }).start();
+    }
+
+
+    @Override
+    public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+    }
+
+    @Override
+    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
     }
 
 
@@ -249,8 +285,9 @@ public class HealthCareFragment extends AbstractHealthFragment implements Adapte
             } else {
                 Log.d(" url string", result);
                 jsonParserr(result);
-                RVAdapter adapter = new RVAdapter(towList);
+                adapter = new RVAdapter(towList);
                 rv.setAdapter(adapter);
+
                 /*hcBaseAdapter = new HCBaseAdapter(getContext(), towList);
                 listview.setAdapter(hcBaseAdapter);*/
 

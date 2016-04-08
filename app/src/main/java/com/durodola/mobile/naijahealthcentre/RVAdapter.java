@@ -15,9 +15,11 @@ import java.util.List;
 /**
  * Created by mobile on 2016-04-01.
  */
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> {
+public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>  {
     List<NameClass> persons;
     ArrayList<HashMap<String, String>> arraylist;
+    private static MyItemClickListener mItemClickListener;
+
 
     RVAdapter(List<NameClass> persons) {
         this.persons = persons;
@@ -26,6 +28,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
     RVAdapter(ArrayList<HashMap<String, String>> arraylist) {
         this.arraylist = arraylist;
     }
+
+
+    // private final View.OnClickListener mOnClickListener = new MyOnClickListener();
 
     @Override
     public PersonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -53,7 +58,14 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
         return arraylist.size();
     }
 
-    public static class PersonViewHolder extends RecyclerView.ViewHolder {
+
+    public interface MyItemClickListener {
+        void onItemClick(View view, int position);
+
+    }
+
+
+    public static class PersonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cv;
         TextView lgatxt_cardview;
         TextView nametxt_cardview;
@@ -64,8 +76,25 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
             cv = (CardView) itemView.findViewById(R.id.cv);
             lgatxt_cardview = (TextView) itemView.findViewById(R.id.name_cardview);
             nametxt_cardview = (TextView) itemView.findViewById(R.id.lga_cardview);
-            personPhoto = (ImageView) itemView.findViewById(R.id.person_photo);
+            //  personPhoto = (ImageView) itemView.findViewById(R.id.person_photo);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(v, getAdapterPosition());
+            }
+
+            //  Log.e("click", " click ");
+
+        }
+
     }
+    public void SetOnItemCLickListener(MyItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
+    }
+
+
 
 }
