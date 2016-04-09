@@ -1,9 +1,7 @@
 package com.durodola.mobile.naijahealthcentre;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
-
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -33,6 +30,11 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     ListView listview;
     EditText searchview;
+    GPSService mGPSService;
+    String address = "";
+    float latitudeN;
+    float longitudeN;
+
 
     String urlreal = "https://api.myjson.com/bins/41u0g";
     private RVAdapter.MyItemClickListener mListener;
@@ -67,17 +69,13 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_for_recyclerview, container, false);
+        mGPSService = new GPSService(getActivity());
+        mGPSService.getLocation();
         // initializeData();
-        //    progressbar = (ProgressBar) view.findViewById(R.id.progressbar);
+        progressbar = (ProgressBar) view.findViewById(R.id.progressbar);
+        progressbarMtd(progressbar);
 
         towList = new ArrayList<HashMap<String, String>>();
-        //  searchview = (EditText) view.findViewById(R.id.edittextid);
-
-// listview
-        // listview = (ListView) view.findViewById(R.id.health_centre_list);
-        // rv = (RecyclerView)view.findViewById(R.id.rv);
-
-
         rv = (RecyclerView) view.findViewById(R.id.rv);
         // not sure
         rv.setHasFixedSize(true);
@@ -87,80 +85,17 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
         new DownloadTask().execute();
 
-        //list view
-        //testbtn.setOnClickListener(this);
-        // listview.setOnItemClickListener(this);
         return view;
 
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        // text
-    /*    searchview.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                String text = searchview.getText().toString().toLowerCase(Locale.getDefault());
-                hcBaseAdapter.filter(text);
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });*/
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (adapter != null) {
-            adapter.SetOnItemCLickListener(new RVAdapter.MyItemClickListener() {
-                                               @Override
-                                               public void onItemClick(View view, int position) {
-                                                   Log.e("TAG", " onresume");
-
-                                               }
-                                           }
-            );
-
-        }
-
-
-    }
-
- /*   @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (adapter != null) {
-            adapter.SetOnItemCLickListener(new RVAdapter.MyItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
-                    Toast.makeText(getActivity(), " position" + position, Toast.LENGTH_LONG);
-                    Log.e(" recyccler ", " toarch ");
-                }
-            });
-
-
-        }
-
-
-    }*/
 
     // mathod to parse json
     private void jsonParserr(String in) {
 
         JSONObject reader = null;
         String lga, town, name, contractor, lng, lat;
-
+        // getCurrentLocation();
 
         try {
             /// healthcare
@@ -206,42 +141,6 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
     }
 
-/*    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // progressbarMtd();
-        Switchfragment(R.id.mylayout, mapFragment, Float.parseFloat(towList.get(position).get(TAG_LNG)),
-                Float.parseFloat(towList.get(position).get(TAG_LAT)), towList.get(position).get(TAG_NAME),
-                towList.get(position).get(TAG_CONTRACTOR));
-        progressbarMtd();
-
-
-    }*/
-
-    private void progressbarMtd() {
-        progressbar.setVisibility(View.VISIBLE);
-
-// Create a Handler instance on the main thread
-        final Handler handler = new Handler();
-
-// Create and start a new Thread
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Thread.sleep(5000);
-                } catch (Exception e) {
-                } // Just catch the InterruptedException
-
-                // Now we use the Handler to post back to the main thread
-                handler.post(new Runnable() {
-                    public void run() {
-                        // Set the View's visibility back on the main UI Thread
-                        progressbar.setVisibility(View.INVISIBLE);
-                    }
-                });
-            }
-        }).start();
-    }
-
 
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
@@ -258,6 +157,32 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
     }
 
+    private void getCurrentLocation() {
+        if (mGPSService.isLocationAvailable == false) {
+
+            // Here you can ask the user to try again, using return; for that
+            Toast.makeText(getActivity(), "Your location is not available, please try again.", Toast.LENGTH_SHORT).show();
+            return;
+
+            // Or you can continue without getting the location, remove the return; above and uncomment the line given below
+            // address = "Location not available";
+        } else {
+
+            // Getting location co-ordinates
+
+            latitudeN = (float) mGPSService.getLatitude();
+            longitudeN = (float) mGPSService.getLongitude();
+            //Toast.makeText(getActivity(), "Latitude:" + latitude + " | Longitude: " + longitude, Toast.LENGTH_LONG).show();
+
+            address = mGPSService.getLocationAddress();
+
+            Log.e("Latitude: ", " " + latitudeN + " \nLongitude: " + latitudeN + " " + address);
+            //tvAddress.setText("Address: " + address);
+        }
+
+
+    }
+
 
     private class DownloadTask extends AsyncTask<String, Integer, String> {
         String stringUrl;
@@ -265,6 +190,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
         @Override
         protected String doInBackground(String... url) {
+       
             try {
                 URL url1 = new URL(urlreal);
                 HttpURLConnection con = (HttpURLConnection) url1.openConnection();
@@ -279,18 +205,29 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
         @Override
         protected void onPostExecute(String result) {
-            // call the adapter from here
+            getCurrentLocation();
+
             if (result == null) {
                 Log.e("result is null ", " result is null");
             } else {
                 Log.d(" url string", result);
                 jsonParserr(result);
+
                 adapter = new RVAdapter(towList);
                 rv.setAdapter(adapter);
+                if (adapter != null) {
+                    adapter.SetOnItemCLickListener(new RVAdapter.MyItemClickListener() {
+                        @Override
+                        public void onItemClick(int position, View v) {
+                            Log.e(" longNn " + Float.parseFloat(towList.get(position).get(TAG_LNG)), " latn " + Float.parseFloat(towList.get(position).get(TAG_LAT)));
+                            Switchfragment(R.id.mylayout, mapFragment, Float.parseFloat(towList.get(position).get(TAG_LNG)),
+                                    Float.parseFloat(towList.get(position).get(TAG_LAT)), towList.get(position).get(TAG_NAME),
+                                    towList.get(position).get(TAG_CONTRACTOR), latitudeN, longitudeN, address);
 
-                /*hcBaseAdapter = new HCBaseAdapter(getContext(), towList);
-                listview.setAdapter(hcBaseAdapter);*/
+                        }
+                    });
 
+                }
 
             }
 

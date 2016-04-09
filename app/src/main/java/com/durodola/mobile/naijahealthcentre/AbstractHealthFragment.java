@@ -1,19 +1,16 @@
 package com.durodola.mobile.naijahealthcentre;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 /**
  * Created by mobile on 2016-03-16.
@@ -23,6 +20,11 @@ public abstract class AbstractHealthFragment extends Fragment {
     private static String LGA = "lga";
     private static String TOWN = "town";
     private static String CONTRACTOR = "contractor";
+    GPSService mGPSService;
+    String address = "";
+    float latitudeN;
+    float longitudeN;
+    String readStream;
 
 
     protected static String readStream(InputStream in) {
@@ -39,7 +41,7 @@ public abstract class AbstractHealthFragment extends Fragment {
         return sb.toString();
     }
 
-    protected void Switchfragment(int layout, Fragment fragment, float longitude, float latitude, String name, String contractor) {
+    protected void Switchfragment(int layout, Fragment fragment, float longitude, float latitude, String name, String contractor, float currentLattitude, float currentLongitude, String address) {
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
@@ -49,9 +51,12 @@ public abstract class AbstractHealthFragment extends Fragment {
         bundle.putFloat(String.valueOf(MapFragment.DATA_RECEIVE_LONG), longitude);
         // bundle.putFloat(" longitude", longitude);
         bundle.putFloat(String.valueOf(MapFragment.DATA_RECEIVE_LAT), latitude);
-        bundle.putFloat(String.valueOf(MapFragment.DATA_RECEIVE_LAT), latitude);
+        //  bundle.putFloat(String.valueOf(MapFragment.DATA_RECEIVE_LAT), latitude);
         bundle.putString(String.valueOf(MapFragment.DATA_RECEIVE_NAME), name);
         bundle.putString(String.valueOf(MapFragment.DATA_RECEIVE_CONTRACTOR), contractor);
+        bundle.putFloat(String.valueOf(MapFragment.DATA_CURRENT_LATTITUDE), currentLattitude);
+        bundle.putFloat(String.valueOf(MapFragment.DATA_CURRENT_LONGITUDE), currentLongitude);
+        bundle.putString(String.valueOf(MapFragment.DATA_RECEIVE_ADDRESS), address);
 
         fragment.setArguments(bundle);
 
@@ -59,5 +64,29 @@ public abstract class AbstractHealthFragment extends Fragment {
         transaction.commit();
     }
 
+    protected void progressbarMtd(final ProgressBar progressBar) {
+        progressBar.setVisibility(View.VISIBLE);
+
+// Create a Handler instance on the main thread
+        final Handler handler = new Handler();
+
+// Create and start a new Thread
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (Exception e) {
+                } // Just catch the InterruptedException
+
+                // Now we use the Handler to post back to the main thread
+                handler.post(new Runnable() {
+                    public void run() {
+                        // Set the View's visibility back on the main UI Thread
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
+        }).start();
+    }
 
 }

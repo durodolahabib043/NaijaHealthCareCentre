@@ -1,39 +1,22 @@
 package com.durodola.mobile.naijahealthcentre;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by mobile on 2016-04-05.
@@ -44,24 +27,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private SupportMapFragment fragment;
     public static float DATA_RECEIVE_LONG = (float) 3342.34;
 
-    public static float DATA_RECEIVE_LAT = (float) 342.34;
+    public static float DATA_RECEIVE_LAT = (float) 3452.34;
     public static String DATA_RECEIVE_NAME = "name";
     public static String DATA_RECEIVE_CONTRACTOR = "contractor";
-    //float  f = 3342.34;
-    float longtitude;
-    Bundle bundle;
-    float lattitude;
-    String name, contractor;
-    int increment = 4;
-    MyLocation myLocation = new MyLocation();
+    public static float DATA_CURRENT_LATTITUDE = (float) 342.34;
+    public static float DATA_CURRENT_LONGITUDE = (float) 342.343;
 
-    LocationManager lm;
-    String provider;
-    Location l;
-    GPSService mGPSService;
-    String address = "";
-    double latitudeN;
-    double longitudeN;
+    public static String DATA_RECEIVE_ADDRESS = "addrerss";
+    //float  f = 3342.34;
+    float longtitude, currentLongitude;
+    Bundle bundle;
+    float lattitude, currentLattitude;
+    String name, contractor, address;
+    public static String TAG;
 
 
     @Override
@@ -70,8 +48,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
         View view = inflater.inflate(R.layout.mapfragment, container, false);
-        mGPSService = new GPSService(getActivity());
-        mGPSService.getLocation();
+        TAG = getContext().getPackageName();
 
 
         return view;
@@ -86,8 +63,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         bundle = this.getArguments();
         longtitude = bundle.getFloat(String.valueOf(DATA_RECEIVE_LONG));
         lattitude = bundle.getFloat(String.valueOf(DATA_RECEIVE_LAT));
+        Log.e("map lat" + lattitude, " map long" + longtitude);
         name = bundle.getString(DATA_RECEIVE_NAME);
+
         contractor = bundle.getString(DATA_RECEIVE_NAME);
+        currentLattitude = bundle.getFloat(String.valueOf(DATA_CURRENT_LATTITUDE));
+        currentLongitude = bundle.getFloat(String.valueOf(DATA_CURRENT_LONGITUDE));
+        address = bundle.getString(DATA_RECEIVE_ADDRESS);
+        Log.e(" addreaa" + TAG, address);
 
         fragment = (SupportMapFragment) fm.findFragmentById(R.id.map);
         if (fragment == null) {
@@ -104,35 +87,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMap = googleMap;
 
 
-        if (mGPSService.isLocationAvailable == false) {
-
-            // Here you can ask the user to try again, using return; for that
-            Toast.makeText(getActivity(), "Your location is not available, please try again.", Toast.LENGTH_SHORT).show();
-            return;
-
-            // Or you can continue without getting the location, remove the return; above and uncomment the line given below
-            // address = "Location not available";
-        } else {
-
-            // Getting location co-ordinates
-            latitudeN = mGPSService.getLatitude();
-            longitudeN = mGPSService.getLongitude();
-            //Toast.makeText(getActivity(), "Latitude:" + latitude + " | Longitude: " + longitude, Toast.LENGTH_LONG).show();
-
-            address = mGPSService.getLocationAddress();
-
-            //tvLocation.setText("Latitude: " + latitude + " \nLongitude: " + longitude);
-            //tvAddress.setText("Address: " + address);
-        }
-
-    //    Toast.makeText(getActivity(), "Your address is: " + address, Toast.LENGTH_SHORT).show();
-
-        // make sure you close the gps after using it. Save user's battery power
-        mGPSService.closeGPS();
-
-
         LatLng sydney = new LatLng(lattitude, longtitude);
-        LatLng mylocation = new LatLng(latitudeN, longitudeN);
+        LatLng mylocation = new LatLng(currentLattitude, currentLongitude);
+        Log.e("latitude " + lattitude + " longitude  " + longtitude, "currentlat  " + currentLattitude + "currLong  " + currentLongitude);
         mMap.addPolyline(new PolylineOptions()
                 .add(sydney, mylocation)
                 .width(5)

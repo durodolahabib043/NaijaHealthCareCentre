@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by mobile on 2016-04-01.
  */
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>  {
+public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> {
     List<NameClass> persons;
     ArrayList<HashMap<String, String>> arraylist;
     private static MyItemClickListener mItemClickListener;
@@ -60,7 +60,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
 
 
     public interface MyItemClickListener {
-        void onItemClick(View view, int position);
+        public void onItemClick(int position, View v);
 
     }
 
@@ -83,18 +83,23 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
         @Override
         public void onClick(View v) {
             if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(getAdapterPosition(), v);
+            /*if (mItemClickListener != null) {
                 mItemClickListener.onItemClick(v, getAdapterPosition());
-            }
+            }*/
 
-            //  Log.e("click", " click ");
+                //  Log.e("click", " click ");
+
+
+            }
 
         }
 
     }
+
     public void SetOnItemCLickListener(MyItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
-
 
 
 }
