@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class HealthCareFragment extends AbstractHealthFragment implements RecyclerView.OnItemTouchListener {
+public class HealthCareFragment extends AbstractHealthFragment implements RecyclerView.OnItemTouchListener, SearchView.OnQueryTextListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     ListView listview;
@@ -45,6 +46,8 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
     HCBaseAdapter hcBaseAdapter;
     ProgressBar progressbar;
     RVAdapter adapter;
+    SearchView searchView;
+
 
     private static final String TAG_LGA = "lga";
     private static final String TAG_TOWN = "town";
@@ -69,18 +72,25 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_for_recyclerview, container, false);
-        mGPSService = new GPSService(getActivity());
-        mGPSService.getLocation();
-        // initializeData();
         progressbar = (ProgressBar) view.findViewById(R.id.progressbar);
         progressbarMtd(progressbar);
+        searchView = (SearchView) view.findViewById(R.id.searchviewrecycler);
 
         towList = new ArrayList<HashMap<String, String>>();
         rv = (RecyclerView) view.findViewById(R.id.rv);
+        mGPSService = new GPSService(getActivity());
+        mGPSService.getLocation();
+        // initializeData();
+
         // not sure
         rv.setHasFixedSize(true);
         llm = new LinearLayoutManager(getContext());
         rv.setLayoutManager(llm);
+        //  checkForUpdates();
+
+
+        // searchview
+        searchView.setOnQueryTextListener(this);
 
 
         new DownloadTask().execute();
@@ -183,6 +193,33 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        final ArrayList<HashMap<String, String>> filteredModelList = filter(towList, newText);
+        //adapter.
+        adapter.animateTo(filteredModelList);
+        rv.scrollToPosition(0);
+        return true;
+    }
+
+    private ArrayList<HashMap<String, String>> filter(ArrayList<HashMap<String, String>> models, String query) {
+        query = query.toLowerCase();
+
+        final ArrayList<HashMap<String, String>> filteredModelList = new ArrayList<>();
+        for (HashMap<String, String> model : models) {
+            final String text = model.get("lga").toLowerCase();
+            if (text.contains(query)) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
+    }
+
 
     private class DownloadTask extends AsyncTask<String, Integer, String> {
         String stringUrl;
@@ -190,7 +227,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
         @Override
         protected String doInBackground(String... url) {
-       
+
             try {
                 URL url1 = new URL(urlreal);
                 HttpURLConnection con = (HttpURLConnection) url1.openConnection();

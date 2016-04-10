@@ -58,6 +58,61 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
         return arraylist.size();
     }
 
+    public void animateTo(ArrayList<HashMap<String, String>> models) {
+        applyAndAnimateRemovals(models);
+        applyAndAnimateAdditions(models);
+        applyAndAnimateMovedItems(models);
+    }
+
+
+    private void applyAndAnimateRemovals(ArrayList<HashMap<String, String>> newModels) {
+        for (int i = arraylist.size() - 1; i >= 0; i--) {
+            final HashMap<String, String> model = arraylist.get(i);
+            if (!newModels.contains(model)) {
+                removeItem(i);
+            }
+        }
+    }
+
+    private void applyAndAnimateAdditions(ArrayList<HashMap<String, String>> newModels) {
+        for (int i = 0, count = newModels.size(); i < count; i++) {
+            final HashMap<String, String> model = newModels.get(i);
+            if (!arraylist.contains(model)) {
+                addItem(i, model);
+            }
+        }
+    }
+
+    private void applyAndAnimateMovedItems(ArrayList<HashMap<String, String>> newModels) {
+        for (int toPosition = newModels.size() - 1; toPosition >= 0; toPosition--) {
+            final HashMap<String, String> model = newModels.get(toPosition);
+            final int fromPosition = arraylist.indexOf(model);
+            if (fromPosition >= 0 && fromPosition != toPosition) {
+                moveItem(fromPosition, toPosition);
+            }
+        }
+    }
+
+    public HashMap<String, String> removeItem(int position) {
+        final HashMap<String, String> model = arraylist.remove(position);
+        notifyItemRemoved(position);
+        //   notifyDataSetChanged();
+        return model;
+    }
+
+    public void addItem(int position, HashMap<String, String> model) {
+        arraylist.add(position, model);
+        notifyItemInserted(position);
+        // notifyDataSetChanged();
+    }
+
+    public void moveItem(int fromPosition, int toPosition) {
+        final HashMap<String, String> model = arraylist.remove(fromPosition);
+        arraylist.add(toPosition, model);
+        notifyItemMoved(fromPosition, toPosition);
+        // notifyDataSetChanged();
+    }
+
 
     public interface MyItemClickListener {
         public void onItemClick(int position, View v);

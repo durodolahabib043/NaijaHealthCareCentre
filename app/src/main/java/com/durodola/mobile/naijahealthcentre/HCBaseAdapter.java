@@ -38,6 +38,61 @@ public class HCBaseAdapter extends BaseAdapter implements Filterable {
     public int getCount() {
         return towList.size();
     }
+    public void animateTo(ArrayList<HashMap<String, String>> models) {
+        applyAndAnimateRemovals(models);
+        applyAndAnimateAdditions(models);
+        applyAndAnimateMovedItems(models);
+    }
+
+
+    private void applyAndAnimateRemovals(ArrayList<HashMap<String, String>>newModels) {
+        for (int i = towList.size() - 1; i >= 0; i--) {
+            final HashMap<String, String> model = towList.get(i);
+            if (!newModels.contains(model)) {
+                removeItem(i);
+            }
+        }
+    }
+
+    private void applyAndAnimateAdditions(ArrayList<HashMap<String, String>>newModels) {
+        for (int i = 0, count = newModels.size(); i < count; i++) {
+            final HashMap<String, String> model = newModels.get(i);
+            if (!towList.contains(model)) {
+                addItem(i, model);
+            }
+        }
+    }
+
+    private void applyAndAnimateMovedItems(ArrayList<HashMap<String, String>> newModels) {
+        for (int toPosition = newModels.size() - 1; toPosition >= 0; toPosition--) {
+            final HashMap<String, String> model = newModels.get(toPosition);
+            final int fromPosition = towList.indexOf(model);
+            if (fromPosition >= 0 && fromPosition != toPosition) {
+                moveItem(fromPosition, toPosition);
+            }
+        }
+    }
+    public HashMap<String, String> removeItem(int position) {
+        final HashMap<String, String>  model = towList.remove(position);
+       // notifyItemRemoved(position);
+        notifyDataSetChanged();
+        return model;
+    }
+
+    public void addItem(int position, HashMap<String, String> model) {
+        towList.add(position, model);
+     //   notifyItemInserted(position);
+        notifyDataSetChanged();
+    }
+
+    public void moveItem(int fromPosition, int toPosition) {
+        final HashMap<String, String> model = towList.remove(fromPosition);
+        towList.add(toPosition, model);
+       // notifyItemMoved(fromPosition, toPosition);
+        notifyDataSetChanged();
+    }
+
+
 
     @Override
     public HashMap<String, String> getItem(int position) {
