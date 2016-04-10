@@ -21,7 +21,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
     private static MyItemClickListener mItemClickListener;
 
 
-    RVAdapter(ArrayList<HashMap<String, String>> arraylist) {
+    public RVAdapter(ArrayList<HashMap<String, String>> arraylist) {
         this.arraylist = arraylist;
     }
 
@@ -92,21 +92,20 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
     public HashMap<String, String> removeItem(int position) {
         final HashMap<String, String> model = arraylist.remove(position);
         notifyItemRemoved(position);
-        //   notifyDataSetChanged();
         return model;
     }
 
     public void addItem(int position, HashMap<String, String> model) {
         arraylist.add(position, model);
         notifyItemInserted(position);
-        // notifyDataSetChanged();
+
     }
 
     public void moveItem(int fromPosition, int toPosition) {
         final HashMap<String, String> model = arraylist.remove(fromPosition);
         arraylist.add(toPosition, model);
         notifyItemMoved(fromPosition, toPosition);
-        // notifyDataSetChanged();
+
     }
 
 
@@ -114,26 +113,10 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
         public void onItemClick(int position, View v);
 
     }
-  /*  public void filter(String charText) {
-        charText = charText.toLowerCase(Locale.getDefault());
-        worldpopulationlist.clear();
-        if (charText.length() == 0) {
-            worldpopulationlist.addAll(arraylist);
-        } else {
-            for (WorldPopulation wp : arraylist) {
-                if (wp.getCountry().toLowerCase(Locale.getDefault())
-                        .contains(charText)) {
-                    worldpopulationlist.add(wp);
-                }
-            }
-        }
-        notifyDataSetChanged();
-    }*/
 
     public ArrayList<HashMap<String, String>> filter(ArrayList<HashMap<String, String>> models, ArrayList<HashMap<String, String>> completeList, String query) {
         query = query.toLowerCase(Locale.getDefault());
         final ArrayList<HashMap<String, String>> filteredModelList = new ArrayList<HashMap<String, String>>();
-        // final ArrayList<HashMap<String, String>> completeList = new ArrayList<HashMap<String, String>>();
 
 
         if (query.length() == 0) {
@@ -151,18 +134,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
         }
         notifyDataSetChanged();
 
-
-        /*for (HashMap<String, String> model : models) {
-
-
-            String text = model.get("lga").toLowerCase();
-
-            if (text.contains(query)) {
-                filteredModelList.add(model);
-                //adapter.notifyDataSetChanged();
-            }
-        }*/
-        //  adapter.notifyDataSetChanged();
         return filteredModelList;
     }
 
@@ -186,12 +157,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
         public void onClick(View v) {
             if (mItemClickListener != null) {
                 mItemClickListener.onItemClick(getAdapterPosition(), v);
-            /*if (mItemClickListener != null) {
-                mItemClickListener.onItemClick(v, getAdapterPosition());
-            }*/
-
-                //  Log.e("click", " click ");
-
 
             }
 

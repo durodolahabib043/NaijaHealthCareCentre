@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -29,33 +27,27 @@ import java.util.HashMap;
 public class HealthCareFragment extends AbstractHealthFragment implements RecyclerView.OnItemTouchListener, SearchView.OnQueryTextListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    ListView listview;
-    EditText searchview;
-    GPSService mGPSService;
-    String address = "";
-    float latitudeN;
-    float longitudeN;
-
-
-    String urlreal = "https://api.myjson.com/bins/41u0g";
-    private RVAdapter.MyItemClickListener mListener;
-
-
-    ArrayList<HashMap<String, String>> towList , completeList;
     Fragment mapFragment = new MapFragment();
     ProgressBar progressbar;
     RVAdapter adapter;
     SearchView searchView;
+    RecyclerView rv;
+    LinearLayoutManager llm;
 
 
+    GPSService mGPSService;
+    String address = "";
+    float latitudeN;
+    float longitudeN;
+    String urlreal = "https://api.myjson.com/bins/41u0g";
+    private RVAdapter.MyItemClickListener mListener;
+    ArrayList<HashMap<String, String>> towList, completeList;
     private static final String TAG_LGA = "lga";
     private static final String TAG_TOWN = "town";
     private static final String TAG_NAME = "name";
     private static final String TAG_CONTRACTOR = "contractor";
     private static final String TAG_LNG = "lng";
     private static final String TAG_LAT = "lat";
-    RecyclerView rv;
-    LinearLayoutManager llm;
 
 
     public HealthCareFragment() {
@@ -72,7 +64,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_for_recyclerview, container, false);
         progressbar = (ProgressBar) view.findViewById(R.id.progressbar);
-        progressbarMtd(progressbar);
+        //    progressbarMtd(progressbar);
         searchView = (SearchView) view.findViewById(R.id.searchviewrecycler);
 
         towList = new ArrayList<HashMap<String, String>>();
@@ -80,16 +72,11 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
         rv = (RecyclerView) view.findViewById(R.id.rv);
         mGPSService = new GPSService(getActivity());
         mGPSService.getLocation();
-        // initializeData();
 
-        // not sure
         rv.setHasFixedSize(true);
         llm = new LinearLayoutManager(getContext());
         rv.setLayoutManager(llm);
-        //  checkForUpdates();
 
-
-        // searchview
         searchView.setOnQueryTextListener(this);
 
 
@@ -108,8 +95,6 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
         // getCurrentLocation();
 
         try {
-            /// healthcare
-
             reader = new JSONObject(in);
             JSONArray healthcareArray = reader.getJSONArray("healthcare");
             //JSONArray array = new JSONArray(in);
@@ -183,12 +168,10 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
             latitudeN = (float) mGPSService.getLatitude();
             longitudeN = (float) mGPSService.getLongitude();
-            //Toast.makeText(getActivity(), "Latitude:" + latitude + " | Longitude: " + longitude, Toast.LENGTH_LONG).show();
-
             address = mGPSService.getLocationAddress();
 
             Log.e("Latitude: ", " " + latitudeN + " \nLongitude: " + latitudeN + " " + address);
-            //tvAddress.setText("Address: " + address);
+
         }
 
 
@@ -202,58 +185,17 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
     @Override
     public boolean onQueryTextChange(String newText) {
         final ArrayList<HashMap<String, String>> filteredModelList = adapter.filter(towList, completeList, newText);
-        //adapter.
         adapter.animateTo(filteredModelList);
         rv.scrollToPosition(0);
-        //not refre adapter.notifyDataSetChanged();
-        // adapter.notifyDataSetChanged();
-
         return true;
     }
 
-/*
-    private ArrayList<HashMap<String, String>> filter(ArrayList<HashMap<String, String>> models, String query) {
-        query = query.toLowerCase(Locale.getDefault());
-        final ArrayList<HashMap<String, String>> filteredModelList = new ArrayList<HashMap<String, String>>();
-        filteredModelList.clear();
-
-        if (query.length() == 0) {
-            filteredModelList.addAll(models);
-
-        } else {
-            for (int i = 0, l = models.size(); i < l; i++) {
-                final HashMap<String, String> p = models.get(i);
-                if (p.toString().toLowerCase().contains(query))
-                    filteredModelList.add(p);
-
-            }
-        }
-
-
-        */
-/*for (HashMap<String, String> model : models) {
-
-
-            String text = model.get("lga").toLowerCase();
-
-            if (text.contains(query)) {
-                filteredModelList.add(model);
-                //adapter.notifyDataSetChanged();
-            }
-        }*//*
-
-        //  adapter.notifyDataSetChanged();
-        return filteredModelList;
-    }
-*/
-
-
     private class DownloadTask extends AsyncTask<String, Integer, String> {
-        String stringUrl;
         String readStream;
 
         @Override
         protected String doInBackground(String... url) {
+            progressbar.setVisibility(View.VISIBLE);
 
             try {
                 URL url1 = new URL(urlreal);
@@ -270,6 +212,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
         @Override
         protected void onPostExecute(String result) {
             getCurrentLocation();
+
 
             if (result == null) {
                 Log.e("result is null ", " result is null");
@@ -294,6 +237,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
                 }
 
             }
+            progressbar.setVisibility(View.INVISIBLE);
 
         }
     }

@@ -1,11 +1,8 @@
 package com.durodola.mobile.naijahealthcentre;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,6 +42,7 @@ public abstract class AbstractHealthFragment extends Fragment {
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
         transaction.replace(layout, fragment);
         transaction.addToBackStack(null);
         Bundle bundle = new Bundle();
@@ -62,31 +60,6 @@ public abstract class AbstractHealthFragment extends Fragment {
 
         // Commit the transaction
         transaction.commit();
-    }
-
-    protected void progressbarMtd(final ProgressBar progressBar) {
-        progressBar.setVisibility(View.VISIBLE);
-
-// Create a Handler instance on the main thread
-        final Handler handler = new Handler();
-
-// Create and start a new Thread
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (Exception e) {
-                } // Just catch the InterruptedException
-
-                // Now we use the Handler to post back to the main thread
-                handler.post(new Runnable() {
-                    public void run() {
-                        // Set the View's visibility back on the main UI Thread
-                        progressBar.setVisibility(View.INVISIBLE);
-                    }
-                });
-            }
-        }).start();
     }
 
 }
