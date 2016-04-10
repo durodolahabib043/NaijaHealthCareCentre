@@ -10,20 +10,16 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by mobile on 2016-04-01.
  */
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> {
-    List<NameClass> persons;
+
     ArrayList<HashMap<String, String>> arraylist;
     private static MyItemClickListener mItemClickListener;
 
-
-    RVAdapter(List<NameClass> persons) {
-        this.persons = persons;
-    }
 
     RVAdapter(ArrayList<HashMap<String, String>> arraylist) {
         this.arraylist = arraylist;
@@ -117,6 +113,57 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
     public interface MyItemClickListener {
         public void onItemClick(int position, View v);
 
+    }
+  /*  public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        worldpopulationlist.clear();
+        if (charText.length() == 0) {
+            worldpopulationlist.addAll(arraylist);
+        } else {
+            for (WorldPopulation wp : arraylist) {
+                if (wp.getCountry().toLowerCase(Locale.getDefault())
+                        .contains(charText)) {
+                    worldpopulationlist.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }*/
+
+    public ArrayList<HashMap<String, String>> filter(ArrayList<HashMap<String, String>> models, ArrayList<HashMap<String, String>> completeList, String query) {
+        query = query.toLowerCase(Locale.getDefault());
+        final ArrayList<HashMap<String, String>> filteredModelList = new ArrayList<HashMap<String, String>>();
+        // final ArrayList<HashMap<String, String>> completeList = new ArrayList<HashMap<String, String>>();
+
+
+        if (query.length() == 0) {
+            filteredModelList.clear();
+
+            filteredModelList.addAll(completeList);
+
+        } else {
+            for (int i = 0, l = models.size(); i < l; i++) {
+                final HashMap<String, String> p = models.get(i);
+                if (p.toString().toLowerCase().contains(query))
+                    filteredModelList.add(p);
+
+            }
+        }
+        notifyDataSetChanged();
+
+
+        /*for (HashMap<String, String> model : models) {
+
+
+            String text = model.get("lga").toLowerCase();
+
+            if (text.contains(query)) {
+                filteredModelList.add(model);
+                //adapter.notifyDataSetChanged();
+            }
+        }*/
+        //  adapter.notifyDataSetChanged();
+        return filteredModelList;
     }
 
 

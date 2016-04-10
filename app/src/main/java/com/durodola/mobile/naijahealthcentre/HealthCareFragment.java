@@ -41,9 +41,8 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
     private RVAdapter.MyItemClickListener mListener;
 
 
-    ArrayList<HashMap<String, String>> towList;
+    ArrayList<HashMap<String, String>> towList , completeList;
     Fragment mapFragment = new MapFragment();
-    HCBaseAdapter hcBaseAdapter;
     ProgressBar progressbar;
     RVAdapter adapter;
     SearchView searchView;
@@ -77,6 +76,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
         searchView = (SearchView) view.findViewById(R.id.searchviewrecycler);
 
         towList = new ArrayList<HashMap<String, String>>();
+        completeList = new ArrayList<HashMap<String, String>>();
         rv = (RecyclerView) view.findViewById(R.id.rv);
         mGPSService = new GPSService(getActivity());
         mGPSService.getLocation();
@@ -140,6 +140,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
                 contact.put(TAG_LNG, lng);
 
                 towList.add(contact);
+                completeList.add(contact);
 
             }
 
@@ -200,25 +201,51 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        final ArrayList<HashMap<String, String>> filteredModelList = filter(towList, newText);
+        final ArrayList<HashMap<String, String>> filteredModelList = adapter.filter(towList, completeList, newText);
         //adapter.
         adapter.animateTo(filteredModelList);
         rv.scrollToPosition(0);
+        //not refre adapter.notifyDataSetChanged();
+        // adapter.notifyDataSetChanged();
+
         return true;
     }
 
+/*
     private ArrayList<HashMap<String, String>> filter(ArrayList<HashMap<String, String>> models, String query) {
-        query = query.toLowerCase();
+        query = query.toLowerCase(Locale.getDefault());
+        final ArrayList<HashMap<String, String>> filteredModelList = new ArrayList<HashMap<String, String>>();
+        filteredModelList.clear();
 
-        final ArrayList<HashMap<String, String>> filteredModelList = new ArrayList<>();
-        for (HashMap<String, String> model : models) {
-            final String text = model.get("lga").toLowerCase();
-            if (text.contains(query)) {
-                filteredModelList.add(model);
+        if (query.length() == 0) {
+            filteredModelList.addAll(models);
+
+        } else {
+            for (int i = 0, l = models.size(); i < l; i++) {
+                final HashMap<String, String> p = models.get(i);
+                if (p.toString().toLowerCase().contains(query))
+                    filteredModelList.add(p);
+
             }
         }
+
+
+        */
+/*for (HashMap<String, String> model : models) {
+
+
+            String text = model.get("lga").toLowerCase();
+
+            if (text.contains(query)) {
+                filteredModelList.add(model);
+                //adapter.notifyDataSetChanged();
+            }
+        }*//*
+
+        //  adapter.notifyDataSetChanged();
         return filteredModelList;
     }
+*/
 
 
     private class DownloadTask extends AsyncTask<String, Integer, String> {
@@ -249,9 +276,9 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
             } else {
                 Log.d(" url string", result);
                 jsonParserr(result);
-
                 adapter = new RVAdapter(towList);
                 rv.setAdapter(adapter);
+
                 if (adapter != null) {
                     adapter.SetOnItemCLickListener(new RVAdapter.MyItemClickListener() {
                         @Override
