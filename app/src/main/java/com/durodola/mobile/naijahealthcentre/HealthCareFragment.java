@@ -58,29 +58,41 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
         return new HealthCareFragment();
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        isConnected();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_for_recyclerview, container, false);
         progressbar = (ProgressBar) view.findViewById(R.id.progressbar);
         //    progressbarMtd(progressbar);
         searchView = (SearchView) view.findViewById(R.id.searchviewrecycler);
+        //  isConnected();
+        if (isConnected() == true) {
+            towList = new ArrayList<HashMap<String, String>>();
+            completeList = new ArrayList<HashMap<String, String>>();
+            rv = (RecyclerView) view.findViewById(R.id.rv);
+            mGPSService = new GPSService(getActivity());
+            mGPSService.getLocation();
 
-        towList = new ArrayList<HashMap<String, String>>();
-        completeList = new ArrayList<HashMap<String, String>>();
-        rv = (RecyclerView) view.findViewById(R.id.rv);
-        mGPSService = new GPSService(getActivity());
-        mGPSService.getLocation();
+            rv.setHasFixedSize(true);
+            llm = new LinearLayoutManager(getContext());
+            rv.setLayoutManager(llm);
 
-        rv.setHasFixedSize(true);
-        llm = new LinearLayoutManager(getContext());
-        rv.setLayoutManager(llm);
-
-        searchView.setOnQueryTextListener(this);
+            searchView.setOnQueryTextListener(this);
 
 
-        new DownloadTask().execute();
+            new DownloadTask().execute();
+
+        } else {
+            noNetworkAlert();
+        }
+
 
         return view;
 
