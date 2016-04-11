@@ -226,7 +226,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
                     adapter.SetOnItemCLickListener(new RVAdapter.MyItemClickListener() {
                         @Override
                         public void onItemClick(int position, View v) {
-                            Log.e(" longNn " + Float.parseFloat(towList.get(position).get(TAG_LNG)), " latn " + Float.parseFloat(towList.get(position).get(TAG_LAT)));
+
                             Switchfragment(R.id.mylayout, mapFragment, Float.parseFloat(towList.get(position).get(TAG_LNG)),
                                     Float.parseFloat(towList.get(position).get(TAG_LAT)), towList.get(position).get(TAG_NAME),
                                     towList.get(position).get(TAG_CONTRACTOR), latitudeN, longitudeN, address);
