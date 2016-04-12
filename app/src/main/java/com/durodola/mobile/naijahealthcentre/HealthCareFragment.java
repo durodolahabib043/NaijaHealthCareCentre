@@ -58,11 +58,6 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
         return new HealthCareFragment();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        isConnected();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

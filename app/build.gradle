@@ -4,7 +4,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
     //
-  //  manifestPlaceholders = [HOCKEYAPP_APP_ID: "fe457735af2144cbac4906654df3da6d"]
+    //  manifestPlaceholders = [HOCKEYAPP_APP_ID: "fe457735af2144cbac4906654df3da6d"]
 
     defaultConfig {
 
@@ -26,15 +26,18 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
-    compile 'com.android.support:support-v4:23.1.1'
-    compile 'com.android.support:cardview-v7:21.0.+'
-    compile 'com.android.support:recyclerview-v7:21.0.+'
+
+
+    compile 'com.android.support:appcompat-v7:24.0.0-alpha1'
+    compile 'com.android.support:design:24.0.0-alpha1'
+    compile 'com.android.support:support-v4:24.0.0-alpha1'
+    compile 'com.android.support:cardview-v7:24.0.0-alpha1'
+    compile 'com.android.support:recyclerview-v7:24.0.0-alpha1'
     compile 'com.google.android.gms:play-services:8.4.0'
-
     compile 'net.hockeyapp.android:HockeySDK:3.7.2'
-
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
+    compile 'com.google.android.gms:play-services-identity:8.4.0'
+    compile 'com.google.android.gms:play-services-gcm:8.4.0'
 }
 repositories {
     jcenter()
