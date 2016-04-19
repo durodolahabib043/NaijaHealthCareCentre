@@ -226,6 +226,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
             } else {
                 Log.d(" url string", result);
                 jsonParserr(result);
+                Log.e("towlist", " " + towList);
                 adapter = new RVAdapter(towList);
                 rv.setAdapter(adapter);
 
