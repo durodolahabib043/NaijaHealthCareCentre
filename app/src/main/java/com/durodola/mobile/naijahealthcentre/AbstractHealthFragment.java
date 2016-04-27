@@ -67,6 +67,30 @@ public abstract class AbstractHealthFragment extends Fragment {
         transaction.commit();
     }
 
+    protected void SwitchDisplayfragment(Fragment fragment) {
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
+        transaction.replace(R.id.mylayout, fragment);
+        transaction.addToBackStack(null);
+       /* Bundle bundle = new Bundle();
+        bundle.putFloat(String.valueOf(MapFragment.DATA_RECEIVE_LONG), longitude);
+        // bundle.putFloat(" longitude", longitude);
+        bundle.putFloat(String.valueOf(MapFragment.DATA_RECEIVE_LAT), latitude);
+        //  bundle.putFloat(String.valueOf(MapFragment.DATA_RECEIVE_LAT), latitude);
+        bundle.putString(String.valueOf(MapFragment.DATA_RECEIVE_NAME), name);
+        bundle.putString(String.valueOf(MapFragment.DATA_RECEIVE_CONTRACTOR), contractor);
+        bundle.putFloat(String.valueOf(MapFragment.DATA_CURRENT_LATTITUDE), currentLattitude);
+        bundle.putFloat(String.valueOf(MapFragment.DATA_CURRENT_LONGITUDE), currentLongitude);
+        bundle.putString(String.valueOf(MapFragment.DATA_RECEIVE_ADDRESS), address);
+
+        fragment.setArguments(bundle);
+*/
+        // Commit the transaction
+        transaction.commit();
+    }
+
     public boolean isConnected() {
         ConnectivityManager connectivity = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 

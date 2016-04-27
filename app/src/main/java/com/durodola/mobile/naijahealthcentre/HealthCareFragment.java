@@ -202,7 +202,8 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
         @Override
         protected String doInBackground(String... url) {
-            progressbar.setVisibility(View.VISIBLE);
+        //    progressbar.setVisibility(View.VISIBLE);
+            // progessdialog
 
             try {
                 URL url1 = new URL(urlreal);
