@@ -1,5 +1,6 @@
 package com.durodola.mobile.naijahealthcentre;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class HealthCareFragment extends AbstractHealthFragment implements RecyclerView.OnItemTouchListener, SearchView.OnQueryTextListener {
     // TODO: Rename parameter arguments, choose names that match
@@ -30,9 +37,12 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
     Fragment mapFragment = new MapFragment();
     ProgressBar progressbar;
     RVAdapter adapter;
+    ContactAdapter adapterN;
     SearchView searchView;
     RecyclerView rv;
     LinearLayoutManager llm;
+    Restclient restclient;
+    ArrayList<HealthClass> data;
 
 
     GPSService mGPSService;
@@ -67,6 +77,8 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
         progressbar = (ProgressBar) view.findViewById(R.id.progressbar);
         //    progressbarMtd(progressbar);
         searchView = (SearchView) view.findViewById(R.id.searchviewrecycler);
+        restclient = new Restclient();
+        data = new ArrayList<HealthClass>();
         //  isConnected();
         if (isConnected() == true) {
             towList = new ArrayList<HashMap<String, String>>();
@@ -81,8 +93,8 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
             searchView.setOnQueryTextListener(this);
 
-
-            new DownloadTask().execute();
+            downloadContact();
+            //  new DownloadTask().execute();
 
         } else {
             noNetworkAlert();
@@ -191,10 +203,70 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        final ArrayList<HashMap<String, String>> filteredModelList = adapter.filter(towList, completeList, newText);
+       /* final ArrayList<HashMap<String, String>> filteredModelList = adapter.filter(towList, completeList, newText);
         adapter.animateTo(filteredModelList);
-        rv.scrollToPosition(0);
+        rv.scrollToPosition(0)*/
+        ;
         return true;
+    }
+
+    /// download and  parsing of random api
+    private void downloadContact() {
+        final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Contact", "Please wait...", false, false);
+        //Call<HealthCare> call = restclient.getContact().getdetailedContact();
+        //asynchronous call
+       /* Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.stackexchange.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        // prepare call in Retrofit 2.0
+        StackOverflowAPI stackOverflowAPI = retrofit.create(StackOverflowAPI.class);
+
+        Call<StackOverflowQuestions> call = stackOverflowAPI.loadQuestions("android");*/
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.myjson.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        // prepare call in Retrofit 2.0
+        ContactServiceApi stackOverflowAPI = retrofit.create(ContactServiceApi.class);
+
+        Call<HealthCare> call = stackOverflowAPI.getdetailedContact();
+        call.enqueue(new Callback<HealthCare>() {
+            @Override
+            public void onResponse(Call<HealthCare> call, Response<HealthCare> response) {
+                Log.e("data34r234r", " " + response.body().healthcare);
+                data = (ArrayList<HealthClass>) response.body().healthcare ;
+                rv.setAdapter(new ContactAdapter(getContext(), data));
+                loading.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<HealthCare> call, Throwable t) {
+
+            }
+        });
+       /* call.enqueue(new Callback<HealthCare>() {
+            @Override
+            public void onResponse(Call<HealthCare> call, Response<HealthCare> response) {
+                data = (ArrayList<HealthClass>) response.body().healthcare;
+                Log.e("data34r234r", " " + response.toString());
+
+
+               *//* adapterN = new ContactAdapter(getContext(), data);
+                rv.setAdapter(adapter);*//*
+                loading.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(Call<HealthCare> call, Throwable t) {
+                Log.e(" error", "error");
+
+            }
+        });*/
     }
 
     private class DownloadTask extends AsyncTask<String, Integer, String> {
@@ -202,7 +274,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
         @Override
         protected String doInBackground(String... url) {
-        //    progressbar.setVisibility(View.VISIBLE);
+            //    progressbar.setVisibility(View.VISIBLE);
             // progessdialog
 
             try {
