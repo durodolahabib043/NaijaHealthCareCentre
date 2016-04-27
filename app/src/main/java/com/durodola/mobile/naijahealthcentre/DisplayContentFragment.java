@@ -12,9 +12,11 @@ import android.widget.ImageView;
  * Created by mobile on 2016-04-26.
  */
 public class DisplayContentFragment extends AbstractHealthFragment {
-    ImageView hivhealthtips, hospital;
+    ImageView hivhealthtips, hospital, ebolaHiV, tuberculosis;
     HealthCareFragment healthCareFragment;
     EbolaFragment ebolaFragment;
+    HivFragment hivFragment;
+    TuberculosisFragment tuberculosisFragment;
 
     public DisplayContentFragment() {
         // Required empty public constructor
@@ -33,8 +35,12 @@ public class DisplayContentFragment extends AbstractHealthFragment {
         View view = inflater.inflate(R.layout.displaycontent, container, false);
         hivhealthtips = (ImageView) view.findViewById(R.id.HivImage);
         hospital = (ImageView) view.findViewById(R.id.HospiraImage);
+        ebolaHiV = (ImageView) view.findViewById(R.id.ebbolaHiv);
+        tuberculosis = (ImageView) view.findViewById(R.id.tuberculosis);
         healthCareFragment = HealthCareFragment.newInstance();
         ebolaFragment = EbolaFragment.newInstance();
+        hivFragment = HivFragment.newInstance();
+        tuberculosisFragment = TuberculosisFragment.newInstance();
        /* hospital.setOnClickListener(this);
         hivhealthtips.setOnClickListener(this);*/
         return view;
@@ -56,6 +62,19 @@ public class DisplayContentFragment extends AbstractHealthFragment {
             public void onClick(View v) {
                 Log.e("ebiola", " ebola");
                 SwitchDisplayfragment(ebolaFragment);
+            }
+        });
+        ebolaHiV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("ebiola", " ebola");
+                SwitchDisplayfragment(hivFragment);
+            }
+        });
+        tuberculosis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SwitchDisplayfragment(tuberculosisFragment);
             }
         });
     }

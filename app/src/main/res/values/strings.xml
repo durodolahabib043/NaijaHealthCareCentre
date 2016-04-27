@@ -20,4 +20,54 @@ Ebola River, from which the disease takes its name.</string>
     <string name="preventiondef">Good outbreak control relies on applying a package of interventions, namely case management,  surveillance and contact tracing, a good laboratory service, safe burials and social mobilisation.  Community engagement is key to successfully controlling outbreaks. Raising awareness of risk factors for  Ebola infection and protective measures that individuals can take is an effective way to reduce human transmission.  Risk reduction messaging should focus on several factors:  Reducing the risk of wildlife-to-human transmission from contact with infected fruit bats or monkeys/apes and  the consumption of their raw meat. Animals should be handled with gloves and other appropriate protective clothing.  Animal products (blood and meat) should be thoroughly cooked before consumption. Reducing the risk of human-to-human transmission from direct or close contact with people with Ebola symptoms,  particularly with their bodily fluids. Gloves and appropriate personal protective equipment should be worn when   taking care of ill patients at home. Regular hand washing is required after visiting patients in hospital,   as well as after taking care of patients at home.</string>
     <string name="who">WHO RESPONSE</string>
     <string name="whodef">WHO aims to prevent Ebola outbreaks by maintaining surveillance for Ebola virus disease and  supporting at-risk countries to developed preparedness plans. The document provides overall  guidance for control of Ebola and Marburg virus outbreaks</string>
+    <string name="whattoknow">WHAT YOU NEED TO KNOW ABOUT EBOLA</string>
+    <string name="white">#FFFFFF</string>
+    <string name="hivprevention">Tell your sexual partners if you have HIV. Its important to tell anyone with whom youve had sex
+that youre HIV-positive. Your partners need to be tested and to receive medical care if they have the virus.
+They also need to know their HIV status so that they dont infect others.
+Use a clean needle. If you use a needle to inject drugs, make sure its sterile and dont share it.
+Take advantage of needle-exchange programs in your community and consider seeking help for your drug use.
+If youre pregnant, get medical care right away. If youre HIV-positive, you may pass the infection to your baby.
+But if you receive treatment during pregnancy, you can cut your babys risk significantly.</string>
+
+    <string name="meaninghiv">HIV is a virus that gradually attacks the immune system,
+ which is our body’s natural defence against illness. If a person becomes infected with HIV,
+ they will find it harder to fight off infections and diseases. The virus destroys a type of white blood cell
+ called a T-helper cell and makes copies of itself inside them. T-helper cells are also referred to as CD4 cells.
+</string>
+    <string name="hivtreatment">
+HIV is treated using a combination of medicines to fight HIV infection. This is called antiretroviral therapy (ART). ART isn’t a cure, but it can control the virus so that you can live a longer, healthier life and reduce the risk of transmitting HIV to others.
+ART involves taking a combination of HIV medicines (called an HIV regimen) every day, exactly as prescribed.
+These HIV medicines prevent HIV from multiplying (making copies of itself), which reduces the amount of HIV in your body. Having less HIV in your body gives your immune system a chance to recover and fight off infections and cancers. Even though there is still some HIV in the body, the immune system is strong enough to fight off infections and cancers.
+By reducing the amount of HIV in your body, HIV medicines also reduce the risk of transmitting the virus to others.
+ART is recommended for all people with HIV, regardless of how long they’ve had the virus or how healthy they are. If left
+ untreated, HIV will attack the immune system and eventually progress to AIDS.</string>
+    <string name="hivresponse">
+The initial global response to HIV focussed on prevention through behaviour change and research into a vaccine. However, it became clear that knowledge of transmission was not enough to stop the epidemic.
+
+In the mid-2000s, the global response accelerated rapidly with universal access to treatment becoming a major priority. Recently, there have been calls to intensify global efforts with the UNAIDS Fast Track Strategy aiming to end the epidemic by 2030.</string>
+
+
+
+
+    <string name="hivtranmissiondef">
+
+
+Sexual intercourse  Anal and vaginal intercourse are high risk activities.
+In the penis vagina and anus HIV may enter through cuts and sores many of which would be very small
+and hard to notice or directly through the mucus membranes.
+
+Oral sex  There are cases where HIV was transmitted orally,
+so its not completely without risk to have HIV-infected semen, vaginal fluid or blood in your mouth.
+However oral sex is considered a low risk practice. The virus cant survive well in the mouth ,
+so the risk of HIV transmission through the throat, gums, and oral membranes is
+ lower than through vaginal or anal membranes.
+
+Sharing injection needles or works: Sharing needles or other materials used for injecting is considered a
+high-risk practice. Injection needles can pass blood directly from one person to another if you share them. I
+f a person with HIV injects with a needle then shares it with another person, the second person is at very
+high risk for getting HIV.
+</string>
+    <string name="whatHiv">WHAT IS HIV</string>
+    <string name="whattoknowHIV">WHAT DO YOU KNOW ABOUT HIV</string>
 </resources>

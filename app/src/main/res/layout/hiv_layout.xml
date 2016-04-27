@@ -15,8 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:background="@color/red1"
-            android:text="@string/whattoknow" />
+            android:background="@color/green"
+            android:text="@string/whattoknowHIV" />
 
         <TextView
             android:id="@+id/whatsebola"
@@ -24,8 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/what_you_need"
             android:layout_marginTop="10dp"
-            android:background="@color/red2"
-            android:text="@string/whatsebola" />
+            android:background="@color/green"
+            android:text="@string/whatHiv" />
 
         <TextView
             android:id="@+id/eboladef"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/eboladef"
             android:layout_marginTop="10dp"
-            android:background="@color/red2"
+            android:background="@color/green"
             android:text="@string/transmission" />
 
         <TextView
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/transmissiondef"
             android:layout_marginTop="10dp"
-            android:background="@color/red2"
+            android:background="@color/green"
             android:text="@string/treatment" />
 
         <TextView
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/treatmentdef"
             android:layout_marginTop="10dp"
-            android:background="@color/red2"
+            android:background="@color/green"
             android:text="@string/prevention" />
 
         <TextView
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/preventiondef"
             android:layout_marginTop="10dp"
-            android:background="@color/red2"
+            android:background="@color/green"
             android:text="@string/who" />
 
         <TextView
