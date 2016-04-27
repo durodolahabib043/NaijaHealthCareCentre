@@ -11,10 +11,75 @@
 
 
         <TextView
+            android:id="@+id/whatsebola"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="155dp"
             android:text="@string/whatsebola" />
+
+        <TextView
+            android:id="@+id/eboladef"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/whatsebola"
+            android:text="@string/whatsebola" />
+
+        <TextView
+            android:id="@+id/transmission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/eboladef"
+            android:text="@string/transmission" />
+
+        <TextView
+            android:id="@+id/transmissiondef"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/transmission"
+            android:text="@string/transmission" />
+
+        <TextView
+            android:id="@+id/treatment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/transmissiondef"
+            android:text="@string/treatment" />
+
+        <TextView
+            android:id="@+id/treatmentdef"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/treatment"
+            android:text="@string/treatment" />
+
+        <TextView
+            android:id="@+id/prevention"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/treatmentdef"
+            android:text="@string/prevention" />
+
+        <TextView
+            android:id="@+id/preventiondef"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prevention"
+            android:text="@string/prevention" />
+
+        <TextView
+            android:id="@+id/who"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/preventiondef"
+            android:text="@string/who" />
+
+        <TextView
+            android:id="@+id/whodef"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/who"
+            android:text="@string/who" />
+
     </RelativeLayout>
 
 </ScrollView>
