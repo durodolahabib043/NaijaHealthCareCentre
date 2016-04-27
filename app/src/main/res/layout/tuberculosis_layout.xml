@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -16,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
             android:background="@color/purple"
-            android:text="@string/whattoknow" />
+            android:text="@string/whattoknowabout" />
 
         <TextView
             android:id="@+id/whatsebola"
@@ -25,7 +26,7 @@
             android:layout_below="@+id/what_you_need"
             android:layout_marginTop="10dp"
             android:background="@color/purple2"
-            android:text="@string/whatsebola" />
+            android:text="@string/whatstube" />
 
         <TextView
             android:id="@+id/eboladef"
@@ -93,7 +94,8 @@
             android:layout_below="@+id/preventiondef"
             android:layout_marginTop="10dp"
             android:background="@color/purple2"
-            android:text="@string/who" />
+            android:text="@string/who"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/whodef"
@@ -101,7 +103,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/who"
             android:layout_marginTop="10dp"
-            android:text="@string/who" />
+            android:text="@string/who"
+            android:visibility="gone" />
 
         <RelativeLayout
             android:layout_width="match_parent"

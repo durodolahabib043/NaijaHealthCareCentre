@@ -68,6 +68,48 @@ high-risk practice. Injection needles can pass blood directly from one person to
 f a person with HIV injects with a needle then shares it with another person, the second person is at very
 high risk for getting HIV.
 </string>
+
+            <string name="tuber">Tuberculosis  is a potentially serious infectious disease that mainly affects your lungs.
+The bacteria that cause tuberculosis are spread from one person to another through tiny droplets
+released into the air via coughs and sneezes.
+
+Once rare in developed countries, tuberculosis infections began increasing in 1985, partly because
+of the emergence of HIV, the virus that causes AIDS. HIV weakens a persons immune system so it cant fight the TB germs.
+In the United States, because of stronger control programs, tuberculosis began to decrease again in 1993,
+but remains a concern.</string>
+    <string name="tubertransmision">
+When people with TB in their lungs or throat cough, laugh, sneeze, sing, or even talk, the germs that cause TB may be spread into the air.
+        If another person breathes in these germs there is a chance that they will become infected.
+
+It is not easy to become infected with TB.  Usually a person has to be close to someone with tuberculosis disease for a long period of time.
+
+Even if someone becomes infected with TB, that does not mean they will get active TB disease.</string>
+         <string name="tubertreatmtn">
+Medications are the cornerstone of tuberculosis treatment. But treating TB takes much longer than treating other
+             types of bacterial infections.
+
+With tuberculosis, you must take antibiotics for at least six to nine months. The exact drugs and length of
+             treatment depend on your age, overall health, possible drug resistance, the form of TB  and the infections
+             location in the body.
+
+Recent research suggests that a shorter term of treatment  four months instead of nine  with combined medication
+             may be effective in keeping latent TB from becoming active TB. With the shorter course of treatment,
+             people are more likely to take all their medication, and the risk of side effects is lessened. Studies are ongoing.
+</string>
+    <string name="tuberprevention">The TB vaccine called Bacillus Calmette-Guerin  was first developed in the 1920s.
+It is one of the most widely used of all current vaccines, and it reaches more than 80%
+of all new born children and infants in countries where it is part of the national childhood immunization
+programme.1 However, it is also one of the most variable vaccines in routine use.
+
+The BCG vaccine has been shown to provide children with excellent protection against the disseminated forms
+of TB, however protection against pulmonary TB in adults is variable. Since most transmission originates from
+adult cases of pulmonary TB, the BCG vaccine is generally used to protect children, rather than to interrupt
+transmission amongst adults.
+
+The BCG vaccine will often result in the person vaccinated having a positive result to a TB skin test.</string>
     <string name="whatHiv">WHAT IS HIV</string>
     <string name="whattoknowHIV">WHAT DO YOU KNOW ABOUT HIV</string>
+    <string name="whatstuber">WHAT DO YOU KNOW ABOUT TUBERCULOSIS</string>
+    <string name="whattoknowabout">WHAT DO YOU KNOW ABOUT TUBERCULOSIS</string>
+    <string name="whatstube">WHAT IS TUBERCULOSIS</string>
 </resources>

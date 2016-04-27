@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -22,6 +23,7 @@
             android:id="@+id/whatsebola"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_below="@+id/what_you_need"
             android:layout_marginTop="10dp"
             android:background="@color/green"
@@ -32,6 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/whatsebola"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:text="@string/whatsebola" />
 
@@ -49,6 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/transmission"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:text="@string/transmission" />
 
@@ -66,6 +72,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/treatment"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:text="@string/treatment" />
 
@@ -83,6 +91,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/prevention"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:text="@string/prevention" />
 
@@ -100,6 +110,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/who"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:text="@string/who" />
 
