@@ -28,6 +28,7 @@ public class TuberculosisFragment extends AbstractHealthFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tuberculosis_layout, container, false);
+
         tuberaboutebola = (TextView) view.findViewById(R.id.what_you_need);
         tuberTextview = (TextView) view.findViewById(R.id.eboladef);
         whoresponse = (TextView) view.findViewById(R.id.whodef);

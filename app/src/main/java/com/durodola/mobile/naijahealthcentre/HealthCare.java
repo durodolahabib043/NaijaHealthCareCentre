@@ -10,16 +10,3 @@ public class HealthCare {
 
 
 }
-   /* private static HealthCare result = new HealthCare();
-
-    *//* A private Constructor prevents any other
-     * class from instantiating.
-     *//*
-    private HealthCare() {
-    }
-
-    *//* Static 'instance' method *//*
-    public static HealthCare getInstance() {
-        return result;
-    }
-}*/
