@@ -96,7 +96,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 .width(5)
                 .color(Color.RED));
         // add address
-        if (name.equalsIgnoreCase("null")) {
+        if (name !=null)/*name.equalsIgnoreCase("null")*/ {
             name = contractor;
             mMap.addMarker(new MarkerOptions().position(sydney).title(name));
             mMap.addMarker(new MarkerOptions().position(mylocation).title(address));

@@ -11,4 +11,6 @@ public interface DisplayView {
     void switchFragmentHiv();
 
     void switchFragmentTuberculosis();
+
+    Void getUsererror();
 }

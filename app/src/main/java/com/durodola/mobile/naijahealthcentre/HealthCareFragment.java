@@ -44,7 +44,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
     String address = "";
     float latitudeN;
     float longitudeN;
-    String urlreal = "https://api.myjson.com/bins/41u0g";
+   // String urlreal = "https://api.myjson.com/bins/41u0g";
     private RVAdapter.MyItemClickListener mListener;
 
     public HealthCareFragment() {
@@ -62,7 +62,6 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
         View view = inflater.inflate(R.layout.fragment_for_recyclerview, container, false);
         progressbar = (ProgressBar) view.findViewById(R.id.progressbar);
-        //    progressbarMtd(progressbar);
         searchView = (SearchView) view.findViewById(R.id.searchviewrecycler);
         restclient = new Restclient();
         data = new ArrayList<HealthClass>();
@@ -71,20 +70,14 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
             rv = (RecyclerView) view.findViewById(R.id.rv);
             mGPSService = new GPSService(getActivity());
             mGPSService.getLocation();
-
             rv.setHasFixedSize(true);
             llm = new LinearLayoutManager(getContext());
             rv.setLayoutManager(llm);
-
             searchView.setOnQueryTextListener(this);
-
             downloadContact();
-
         } else {
             noNetworkAlert();
         }
-
-
         return view;
 
     }
@@ -168,16 +161,6 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
                                     data.get(position).getContractor(), latitudeN, longitudeN, address);
                         }
                     });
-                   /* adapter.SetOnItemCLickListener(new RVAdapter.MyItemClickListener() {
-                        @Override
-                        public void onItemClick(int position, View v) {
-
-                            Switchfragment(R.id.mylayout, mapFragment, Float.parseFloat(data.get(position).getLng()),
-                                    Float.parseFloat(data.get(position).getLat()), data.get(position).getName(),
-                                    data.get(position).getContractor(), latitudeN, longitudeN, address);
-
-                        }
-                    });*/
                 }
 
             }

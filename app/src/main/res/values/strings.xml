@@ -113,4 +113,8 @@ The BCG vaccine will often result in the person vaccinated having a positive res
     <string name="whattoknowabout">WHAT DO YOU KNOW ABOUT TUBERCULOSIS</string>
     <string name="whatstube">WHAT IS TUBERCULOSIS</string>
     <string name="hello_world">hello world</string>
+    <string name="ebolatip">EBOLA TIPS</string>
+    <string name="hospitaltips">HOSPITAL NEARBY</string>
+    <string name="hivtips">HIV TIPS</string>
+    <string name="tubertips">TUBERCULOSIS TIPS</string>
 </resources>

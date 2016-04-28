@@ -1,6 +1,6 @@
 package com.durodola.mobile.naijahealthcentre.Fragment;
 
-import android.util.Log;
+import com.durodola.mobile.naijahealthcentre.Present.DisPresenter;
 
 /**
  * Created by mobile on 2016-04-28.
@@ -18,46 +18,31 @@ public class DisplayPresenterImpl implements DisPresenter, DisplayInteractor.OnL
 
     @Override
     public void switchFrag() {
-
         if (displayView != null) {
-            // loginView.showProgress();
-            Log.e("nullvali", "nulllvali");
         }
-        Log.e("vali", "vali");
         displayInteractor.login(this);
-        // displayView.switchFragment();
     }
 
     @Override
     public void switchFragHiv() {
         if (displayView != null) {
-            // loginView.showProgress();
-            Log.e("nullvali", "nulllvali");
         }
-        Log.e("vali", "vali");
         displayInteractor.lognHIv(this);
-        // displayView.switchFragment();
+
 
     }
 
     @Override
     public void switchFragTuber() {
         if (displayView != null) {
-            // loginView.showProgress();
-            Log.e("nullvali", "nulllvali");
         }
-        Log.e("vali", "vali");
         displayInteractor.loginTuber(this);
-        // displayView.switchFragment();
     }
 
 
     @Override
     public void onSuccess() {
-        Log.e("succes", "succes");
-        // ebolaFragment = EbolaFragment.newInstance();
         displayView.switchFragmentEbola();
-        //  displayInteractor.login(this);
     }
 
     @Override
@@ -83,9 +68,7 @@ public class DisplayPresenterImpl implements DisPresenter, DisplayInteractor.OnL
     @Override
     public void switchFragHospital() {
         if (displayView != null) {
-
         }
-
         displayInteractor.loginHospital(this);
 
     }

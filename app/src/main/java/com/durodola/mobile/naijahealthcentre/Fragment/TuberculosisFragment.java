@@ -50,6 +50,7 @@ public class TuberculosisFragment extends AbstractHealthFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        tuberaboutebola.setTextColor(Color.parseColor("#FFFFFF"));
         tuberebolaTextviewM.setTextColor(Color.parseColor("#FFFFFF"));
         tubertransmissionM.setTextColor(Color.parseColor("#FFFFFF"));
         tubertreatmentM.setTextColor(Color.parseColor("#FFFFFF"));

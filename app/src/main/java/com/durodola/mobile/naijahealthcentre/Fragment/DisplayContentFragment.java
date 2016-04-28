@@ -5,17 +5,18 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 
 import com.durodola.mobile.naijahealthcentre.AbstractFragment.AbstractHealthFragment;
 import com.durodola.mobile.naijahealthcentre.HealthCareFragment;
+import com.durodola.mobile.naijahealthcentre.Present.DisPresenter;
 import com.durodola.mobile.naijahealthcentre.R;
 
 /**
  * Created by mobile on 2016-04-26.
  */
 public class DisplayContentFragment extends AbstractHealthFragment implements DisplayView, View.OnClickListener {
-    ImageView hivhealthtips, hospital, ebolaHiV, tuberculosis;
+    Button hivhealthtips, hospital, ebolaHiV, tuberculosis;
     HealthCareFragment healthCareFragment;
     EbolaFragment ebolaFragment;
     HivFragment hivFragment;
@@ -37,10 +38,10 @@ public class DisplayContentFragment extends AbstractHealthFragment implements Di
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.displaycontent, container, false);
-        hivhealthtips = (ImageView) view.findViewById(R.id.HivImage);
-        hospital = (ImageView) view.findViewById(R.id.HospiraImage);
-        ebolaHiV = (ImageView) view.findViewById(R.id.ebbolaHiv);
-        tuberculosis = (ImageView) view.findViewById(R.id.tuberculosis);
+        hivhealthtips = (Button) view.findViewById(R.id.HivImage);
+        hospital = (Button) view.findViewById(R.id.HospiraImage);
+        ebolaHiV = (Button) view.findViewById(R.id.ebbolaHiv);
+        tuberculosis = (Button) view.findViewById(R.id.tuberculosis);
         healthCareFragment = HealthCareFragment.newInstance();
         ebolaFragment = EbolaFragment.newInstance();
         hivFragment = HivFragment.newInstance();
@@ -73,6 +74,11 @@ public class DisplayContentFragment extends AbstractHealthFragment implements Di
     @Override
     public void switchFragmentTuberculosis() {
         SwitchDisplayfragment(tuberculosisFragment);
+    }
+
+    @Override
+    public Void getUsererror() {
+        return null;
     }
 
     @Override

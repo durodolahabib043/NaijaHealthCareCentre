@@ -44,7 +44,6 @@ public class DisplaceFragmentTest {
     @Test
     public void shouldNotBeNull() throws Exception {
         DisplayContentFragment fragment = new DisplayContentFragment();
-
         SupportFragmentTestUtil.startFragment(fragment);
         assertNotNull(fragment);
     }
@@ -52,15 +51,9 @@ public class DisplaceFragmentTest {
     @Test
     public void buttonClickShouldStartNewActivity() throws Exception {
         hivFragment = new HivFragment();
-        //  hi fragment = new DisplayContentFragment();
-        //   hivFragment = new HivFragment();
         SupportFragmentTestUtil.startFragment(hivFragment);
         assertNotNull(hivFragment);
 
-
-
-       /* Intent intent = Robolectric.shadowOf(activity).peekNextStartedActivity();
-        assertEquals(SecondActivity.class.getCanonicalName(), intent.getComponent().getClassName());*/
     }
 
     private void startFragment(Fragment fragment) {

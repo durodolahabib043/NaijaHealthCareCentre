@@ -13,19 +13,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+
+        <RelativeLayout
+            android:id="@+id/what_you_need_layout_tuber"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="70dp"
+            android:background="@color/purple">
+
+            <TextView
+                android:id="@+id/what_you_need"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="@string/whattoknowabout" />
+
+        </RelativeLayout>
+
+
+        <!--<TextView
             android:id="@+id/what_you_need"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
             android:background="@color/purple"
-            android:text="@string/whattoknowabout" />
+            android:text="@string/whattoknowabout" />-->
 
         <TextView
             android:id="@+id/whatsebola"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/what_you_need"
+            android:layout_below="@+id/what_you_need_layout_tuber"
             android:layout_marginTop="10dp"
             android:background="@color/purple2"
             android:text="@string/whatstube" />
