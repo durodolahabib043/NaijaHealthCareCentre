@@ -1,4 +1,4 @@
-package com.durodola.mobile.naijahealthcentre;
+package com.durodola.mobile.naijahealthcentre.Utils;
 
 /**
  * Created by mobile on 2016-04-27.

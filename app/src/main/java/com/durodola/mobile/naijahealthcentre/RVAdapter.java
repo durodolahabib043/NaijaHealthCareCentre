@@ -149,7 +149,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
             cv = (CardView) itemView.findViewById(R.id.cv);
             lgatxt_cardview = (TextView) itemView.findViewById(R.id.name_cardview);
             nametxt_cardview = (TextView) itemView.findViewById(R.id.lga_cardview);
-            //  personPhoto = (ImageView) itemView.findViewById(R.id.person_photo);
             itemView.setOnClickListener(this);
         }
 

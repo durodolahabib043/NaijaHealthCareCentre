@@ -1,4 +1,4 @@
-package com.durodola.mobile.naijahealthcentre;
+package com.durodola.mobile.naijahealthcentre.Utils;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

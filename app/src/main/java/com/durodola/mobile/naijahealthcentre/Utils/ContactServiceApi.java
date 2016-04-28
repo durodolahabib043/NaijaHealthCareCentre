@@ -1,4 +1,6 @@
-package com.durodola.mobile.naijahealthcentre;
+package com.durodola.mobile.naijahealthcentre.Utils;
+
+import com.durodola.mobile.naijahealthcentre.HealthCare;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

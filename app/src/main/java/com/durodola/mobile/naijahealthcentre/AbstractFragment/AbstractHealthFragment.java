@@ -1,4 +1,4 @@
-package com.durodola.mobile.naijahealthcentre;
+package com.durodola.mobile.naijahealthcentre.AbstractFragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,6 +8,10 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+
+import com.durodola.mobile.naijahealthcentre.Fragment.MapFragment;
+import com.durodola.mobile.naijahealthcentre.R;
+import com.durodola.mobile.naijahealthcentre.Utils.GPSService;
 
 import java.io.BufferedReader;
 import java.io.IOException;

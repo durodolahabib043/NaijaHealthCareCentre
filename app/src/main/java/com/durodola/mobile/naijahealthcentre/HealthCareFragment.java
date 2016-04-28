@@ -14,6 +14,12 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.durodola.mobile.naijahealthcentre.AbstractFragment.AbstractHealthFragment;
+import com.durodola.mobile.naijahealthcentre.Fragment.MapFragment;
+import com.durodola.mobile.naijahealthcentre.Utils.GPSService;
+import com.durodola.mobile.naijahealthcentre.Utils.HealthClass;
+import com.durodola.mobile.naijahealthcentre.Utils.Restclient;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -40,6 +46,7 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
     float longitudeN;
     String urlreal = "https://api.myjson.com/bins/41u0g";
     private RVAdapter.MyItemClickListener mListener;
+
     public HealthCareFragment() {
         // Required empty public constructor
     }
@@ -79,6 +86,12 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
 
         return view;
+
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
     }
 
@@ -132,17 +145,41 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
         ;
         return true;
     }
+
     /// download and  parsing of random api
     private void downloadContact() {
         final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Contact", "Please wait...", false, false);
+        getCurrentLocation();
         Call<HealthCare> call = restclient.getContact().getdetailedContact();
         call.enqueue(new Callback<HealthCare>() {
             @Override
             public void onResponse(Call<HealthCare> call, Response<HealthCare> response) {
                 Log.e("data34r234r", " " + response.body().healthcare);
                 data = (ArrayList<HealthClass>) response.body().healthcare;
-                rv.setAdapter(new ContactAdapter(getContext(), data));
+                adapterN = new ContactAdapter(getContext(), data);
+                rv.setAdapter(adapterN);
                 loading.dismiss();
+                if (adapterN != null) {
+                    adapterN.SetOnItemCLickListener(new ContactAdapter.MyItemClickListener() {
+                        @Override
+                        public void onItemClick(int position, View v) {
+                            Switchfragment(R.id.mylayout, mapFragment, Float.parseFloat(data.get(position).getLng()),
+                                    Float.parseFloat(data.get(position).getLat()), data.get(position).getName(),
+                                    data.get(position).getContractor(), latitudeN, longitudeN, address);
+                        }
+                    });
+                   /* adapter.SetOnItemCLickListener(new RVAdapter.MyItemClickListener() {
+                        @Override
+                        public void onItemClick(int position, View v) {
+
+                            Switchfragment(R.id.mylayout, mapFragment, Float.parseFloat(data.get(position).getLng()),
+                                    Float.parseFloat(data.get(position).getLat()), data.get(position).getName(),
+                                    data.get(position).getContractor(), latitudeN, longitudeN, address);
+
+                        }
+                    });*/
+                }
+
             }
 
             @Override

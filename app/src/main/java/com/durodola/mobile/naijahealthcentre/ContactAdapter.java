@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.durodola.mobile.naijahealthcentre.Fragment.MapFragment;
+import com.durodola.mobile.naijahealthcentre.Utils.HealthClass;
+
 import java.util.ArrayList;
 
 /**
@@ -20,6 +23,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.PersonVi
     Context context;
     HealthCare contact;
     MapFragment mapFragment;
+    private static MyItemClickListener mItemClickListener;
 
     public ContactAdapter(Context context, ArrayList<HealthClass> contactResultArrayList) {
         this.contactResultArrayList = contactResultArrayList;
@@ -65,7 +69,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.PersonVi
         return contactResultArrayList.size();
     }
 
-    public static class PersonViewHolder extends RecyclerView.ViewHolder {
+    public interface MyItemClickListener {
+        public void onItemClick(int position, View v);
+
+    }
+
+    public static class PersonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cv;
         TextView lgatxt_cardview;
         TextView nametxt_cardview;
@@ -77,7 +86,18 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.PersonVi
             lgatxt_cardview = (TextView) itemView.findViewById(R.id.name_cardview);
             nametxt_cardview = (TextView) itemView.findViewById(R.id.lga_cardview);
             //  personPhoto = (ImageView) itemView.findViewById(R.id.person_photo);
-            // itemView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(getAdapterPosition(), v);
+
+            }
+        }
+    }
+    public void SetOnItemCLickListener(MyItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
     }
 }

@@ -1,4 +1,4 @@
-package com.durodola.mobile.naijahealthcentre;
+package com.durodola.mobile.naijahealthcentre.Fragment;
 
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
+
+import com.durodola.mobile.naijahealthcentre.AbstractFragment.AbstractHealthFragment;
+import com.durodola.mobile.naijahealthcentre.R;
 
 /**
  * Created by mobile on 2016-04-26.

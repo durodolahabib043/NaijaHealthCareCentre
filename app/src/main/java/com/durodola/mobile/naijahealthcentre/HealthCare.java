@@ -1,5 +1,7 @@
 package com.durodola.mobile.naijahealthcentre;
 
+import com.durodola.mobile.naijahealthcentre.Utils.HealthClass;
+
 import java.util.List;
 
 /**

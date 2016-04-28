@@ -1,4 +1,4 @@
-package com.durodola.mobile.naijahealthcentre;
+package com.durodola.mobile.naijahealthcentre.Utils;
 
 import android.content.Context;
 import android.location.Location;

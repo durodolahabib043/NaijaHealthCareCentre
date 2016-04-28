@@ -1,4 +1,4 @@
-package com.durodola.mobile.naijahealthcentre;
+package com.durodola.mobile.naijahealthcentre.Utils;
 
 import android.app.AlertDialog;
 import android.app.Service;
