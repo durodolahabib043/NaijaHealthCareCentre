@@ -1,9 +1,5 @@
 package com.durodola.mobile.naijahealthcentre;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-
 import com.durodola.mobile.naijahealthcentre.Activity.MainActivity;
 import com.durodola.mobile.naijahealthcentre.Fragment.DisplayContentFragment;
 import com.durodola.mobile.naijahealthcentre.Fragment.HivFragment;
@@ -49,17 +45,11 @@ public class DisplaceFragmentTest {
     }
 
     @Test
-    public void buttonClickShouldStartNewActivity() throws Exception {
+    public void buttonClickShouldStartNewFragment() throws Exception {
         hivFragment = new HivFragment();
         SupportFragmentTestUtil.startFragment(hivFragment);
         assertNotNull(hivFragment);
 
     }
 
-    private void startFragment(Fragment fragment) {
-        FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(fragment, null);
-        fragmentTransaction.commit();
-    }
 }

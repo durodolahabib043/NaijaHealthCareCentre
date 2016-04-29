@@ -1,7 +1,5 @@
 package com.durodola.mobile.naijahealthcentre;
 
-import android.widget.TextView;
-
 import com.durodola.mobile.naijahealthcentre.Activity.MainActivity;
 
 import org.junit.Before;
@@ -15,13 +13,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by mobile on 2016-04-27.
+ * Created by mobile on 2016-04-28.
  */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class)
-public class HivFragmentTest {
+public class TuberculosisFragementTest {
     MainActivity activity;
-    private TextView treatmenttxt;
 
     @Before
     public void setup() {
@@ -30,10 +27,10 @@ public class HivFragmentTest {
     }
 
     @Test
-    public void testHivDisplay() {
+    public void testTuberDisplay() {
+
         assertThat(activity.getResources().getString(R.string.treatment), equalTo("TREATMENT AND VACCINE"));
         assertThat(activity.getResources().getString(R.string.prevention), equalTo("PREVENTION AND CONTROL"));
         assertThat(activity.getResources().getString(R.string.who), equalTo("WHO RESPONSE"));
     }
-
 }
