@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -27,26 +26,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class HealthCareFragment extends AbstractHealthFragment implements RecyclerView.OnItemTouchListener, SearchView.OnQueryTextListener {
+public class HealthCareFragment extends AbstractHealthFragment implements RecyclerView.OnItemTouchListener {
 
     Fragment mapFragment = new MapFragment();
-    ProgressBar progressbar;
-    RVAdapter adapter;
     ContactAdapter adapterN;
     SearchView searchView;
     RecyclerView rv;
     LinearLayoutManager llm;
     Restclient restclient;
     ArrayList<HealthClass> data;
-
-
     GPSService mGPSService;
     String address = "";
     float latitudeN;
     float longitudeN;
-   // String urlreal = "https://api.myjson.com/bins/41u0g";
-    private RVAdapter.MyItemClickListener mListener;
-
     public HealthCareFragment() {
         // Required empty public constructor
     }
@@ -61,7 +53,6 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_for_recyclerview, container, false);
-        progressbar = (ProgressBar) view.findViewById(R.id.progressbar);
         searchView = (SearchView) view.findViewById(R.id.searchviewrecycler);
         restclient = new Restclient();
         data = new ArrayList<HealthClass>();
@@ -73,7 +64,6 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
             rv.setHasFixedSize(true);
             llm = new LinearLayoutManager(getContext());
             rv.setLayoutManager(llm);
-            searchView.setOnQueryTextListener(this);
             downloadContact();
         } else {
             noNetworkAlert();
@@ -124,21 +114,6 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
 
 
     }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-       /* final ArrayList<HashMap<String, String>> filteredModelList = adapter.filter(towList, completeList, newText);
-        adapter.animateTo(filteredModelList);
-        rv.scrollToPosition(0)*/
-        ;
-        return true;
-    }
-
     /// download and  parsing of random api
     private void downloadContact() {
         final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Contact", "Please wait...", false, false);
@@ -147,7 +122,6 @@ public class HealthCareFragment extends AbstractHealthFragment implements Recycl
         call.enqueue(new Callback<HealthCare>() {
             @Override
             public void onResponse(Call<HealthCare> call, Response<HealthCare> response) {
-                Log.e("data34r234r", " " + response.body().healthcare);
                 data = (ArrayList<HealthClass>) response.body().healthcare;
                 adapterN = new ContactAdapter(getContext(), data);
                 rv.setAdapter(adapterN);

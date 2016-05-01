@@ -20,6 +20,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    defaultConfig {
+        multiDexEnabled true
+    }
 }
 
 
@@ -47,14 +50,14 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'com.squareup.picasso:picasso:2.5.2'
 
-    compile('org.powermock:powermock-api-mockito:1.6.2') {
+   /* compile('org.powermock:powermock-api-mockito:1.6.2') {
         exclude module: 'hamcrest-core'
         exclude module: 'objenesis'
     }
     compile('org.powermock:powermock-module-junit4:1.6.2') {
         exclude module: 'hamcrest-core'
         exclude module: 'objenesis'
-    }
+    }*/
 
 
     /* testCompile 'com.squareup.assertj:assertj-android:1.1.0'
